@@ -1,7 +1,7 @@
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import entity.Member;
+
+import javax.persistence.*;
+import java.util.List;
 
 public class JpaMain {
 
@@ -12,11 +12,13 @@ public class JpaMain {
 
         EntityTransaction tx = em.getTransaction(); //트랜잭션 기능 획득
         try {
-
             tx.begin(); //트랜잭션 시작
 
-            tx.commit();//트랜잭션 커밋
+            TypedQuery<Member> query = em.createQuery("select m from Member m", Member.class);
+            List<Member> resultList = query.getResultList();
+            System.out.println("resultList = " + resultList);
 
+            tx.commit();//트랜잭션 커밋
         } catch (Exception e) {
             e.printStackTrace();
             tx.rollback(); //트랜잭션 롤백

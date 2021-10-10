@@ -4,24 +4,18 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-@Setter @Getter
+@Getter @Setter
 @ToString
-public class Member {
+public class Team {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
-
-    private Integer age;
-
-    @ManyToOne
-    @JoinColumn(name = "team_id")
-    private Team team;
-
 }
-
